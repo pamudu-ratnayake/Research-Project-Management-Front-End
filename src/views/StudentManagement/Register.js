@@ -30,15 +30,15 @@ const Register = () => {
                 href="#pablo"
                 onClick={(e) => e.preventDefault()}
               >
-                <span className="btn-inner--icon">
-                  {/* <img
+                {/* <span className="btn-inner--icon">
+                  <img
                     alt="..."
                     src={
                       require("../../assets/img/icons/common/github.svg")
                         .default
                     }
-                  /> */}
-                </span>
+                  />
+                </span> */}
                 <span className="btn-inner--text">Github</span>
               </Button>
               <Button
@@ -47,15 +47,15 @@ const Register = () => {
                 href="#pablo"
                 onClick={(e) => e.preventDefault()}
               >
-                <span className="btn-inner--icon">
-                  {/* <img
+                {/* <span className="btn-inner--icon">
+                  <img
                     alt="..."
                     src={
                       require("../../assets/img/icons/common/google.svg")
                         .default
                     }
-                  /> */}
-                </span>
+                  />
+                </span> */}
                 <span className="btn-inner--text">Google</span>
               </Button>
             </div>
@@ -69,27 +69,46 @@ const Register = () => {
                 <InputGroup className="input-group-alternative mb-3">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i className="ni ni-circle-08" />
+                      {/* <i className="ni ni-circle-08" /> */}
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input placeholder="Name" type="text" />
+                  <Input 
+                  placeholder="Name" 
+                  type="text" 
+                  />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
                 <InputGroup className="input-group-alternative mb-3">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i className="ni ni-hat-3" />
+                      {/* <i className="ni ni-hat-3" /> */}
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input placeholder="Student Regidtration Number" type="text" />
+                  <Input 
+                  placeholder="Student Regidtration Number" 
+                  type="text" 
+                  />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
                 <InputGroup className="input-group-alternative mb-3">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i className="ni ni-email-83" />
+                      {/* <i className="ni ni-circle-08" /> */}
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input 
+                  placeholder="Faculty" 
+                  type="text" 
+                  />
+                </InputGroup>
+              </FormGroup>
+              <FormGroup>
+                <InputGroup className="input-group-alternative mb-3">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      {/* <i className="ni ni-email-83" /> */}
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
@@ -103,7 +122,7 @@ const Register = () => {
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i className="ni ni-lock-circle-open" />
+                      {/* <i className="ni ni-lock-circle-open" /> */}
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
