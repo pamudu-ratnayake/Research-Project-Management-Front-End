@@ -43,7 +43,6 @@ const RegisterGroup = (props) => {
   });
 
   const [student, setStudent] = useState([]);
-  const [pkg, setPkg] = useState([]);
 
   const add = async (event) => {
     await event.preventDefault();

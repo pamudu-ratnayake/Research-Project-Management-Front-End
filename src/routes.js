@@ -8,6 +8,7 @@ import StudentRegister from "./views/auth/StudentRegister";
 import StaffRegister from "./views/auth/StaffRegister";
 import PublishSubmitLinks from "./views/admin/PublishSubmitLinks";
 import CreatePanel from "./views/admin/CreatePanel";
+import RegisterGroup from "./views/StudentManagement/RegisterGroup";
 
 var routes = [
     {
@@ -69,6 +70,12 @@ var routes = [
         name: "Create Panel",
         component: CreatePanel,
         layout: "/admin"
+    },
+    {
+        path: "/registerGroup",
+        name: "Register Group",
+        component: RegisterGroup,
+        layout: "/dashboard"
     },
 ];
 
