@@ -12,9 +12,60 @@ import {
   InputGroup,
   Row,
   Col,
+  Label,
+  option
 } from "reactstrap";
+import { Formik, useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
 
 const Register = () => {
+  //Validation
+  const validationSchema = Yup.object({
+    // Name: Yup.string().required("Required!"),
+    // Registration_no: Yup.string().required("Required!"),
+    // Faculty: Yup.string().required("Required!"),
+    // Email: Yup.string().email("Invalid Email!").required("Required!"),
+    // Password: Yup.string().required("Required"),
+  });
+
+  const initialValues = {
+    enableReinitialize: true,
+    validateOnMount: true,
+    Name: "",
+    Registration_no: "",
+    Faculty: "",
+    Email: "",
+    Password: "",
+  };
+
+  const onSubmit = (values) => {
+    console.log("form data", values);
+
+    axios
+      .post("http://localhost:8080/student/addStudentDetails", values)
+      .then((res) => {
+        console.log(res);
+        console.log("Data", formdata);
+
+        // history.push({
+        //   pathname:`/admin/SponsorList`
+        // })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    alert("");
+    window.location.reload(false);
+  };
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
+
   return (
     <>
       <Col lg="6" md="8">
@@ -64,73 +115,123 @@ const Register = () => {
             <div className="text-center text-muted mb-4">
               <small>Or sign up with credentials</small>
             </div>
-            <Form role="form">
+            <Form role="form" onSubmit={formik.handleSubmit}>
               <FormGroup>
-                <InputGroup className="input-group-alternative mb-3">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      {/* <i className="ni ni-circle-08" /> */}
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input 
-                  placeholder="Name" 
-                  type="text" 
-                  />
-                </InputGroup>
+                {/* <InputGroup className="input-group-alternative mb-3"> */}
+
+                <Label>
+                  Name
+                  {/* <i className="ni ni-circle-08" /> */}
+                </Label>
+
+                <Input
+                  placeholder="Name"
+                  type="text"
+                  name="Name"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.Name}
+                />
+                {formik.touched.Name && formik.errors.Name ? (
+                  <div style={{ color: "red" }}>{formik.errors.Name}</div>
+                ) : null}
+                {/* </InputGroup> */}
               </FormGroup>
               <FormGroup>
-                <InputGroup className="input-group-alternative mb-3">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      {/* <i className="ni ni-hat-3" /> */}
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input 
-                  placeholder="Student Regidtration Number" 
-                  type="text" 
-                  />
-                </InputGroup>
+                <Label>
+                  Student Registration Number
+                  {/* <i className="ni ni-hat-3" /> */}
+                </Label>
+
+                <Input
+                  placeholder="Student Regidtration Number"
+                  type="text"
+                  name="Registration_no"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.Registration_no}
+                />
+                {formik.touched.Registration_no &&
+                formik.errors.Registration_no ? (
+                  <div style={{ color: "red" }}>
+                    {formik.errors.Registration_no}
+                  </div>
+                ) : null}
               </FormGroup>
               <FormGroup>
-                <InputGroup className="input-group-alternative mb-3">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      {/* <i className="ni ni-circle-08" /> */}
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input 
-                  placeholder="Faculty" 
-                  type="text" 
-                  />
-                </InputGroup>
+                <Label>
+                  {/* <i className="ni ni-circle-08" /> */}
+                  Faculty
+                </Label>
+
+                <Input
+                  placeholder="Faculty"
+                  type="select"
+                  name="Faculty"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.Faculty}
+                >
+                <option>
+                  Computing
+                </option>
+                <option>
+                  Engineering
+                </option>
+                <option>
+                  Business
+                </option>
+                <option>
+                  Humanities & sciences
+                </option>
+                <option>
+                  Architecture
+                </option>
+                <option>
+                  Hospitality & Culinary
+                </option>
+                </Input>
+                {formik.touched.Faculty && formik.errors.Faculty ? (
+                  <div style={{ color: "red" }}>{formik.errors.Faculty}</div>
+                ) : null}
               </FormGroup>
               <FormGroup>
-                <InputGroup className="input-group-alternative mb-3">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      {/* <i className="ni ni-email-83" /> */}
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    placeholder="Email"
-                    type="email"
-                    autoComplete="new-email"
-                  />
-                </InputGroup>
+                <Label>
+                  Email
+                  {/* <i className="ni ni-email-83" /> */}
+                </Label>
+
+                <Input
+                  placeholder="Email"
+                  type="email"
+                  name="Email"
+                  autoComplete="new-email"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.Email}
+                />
+                {formik.touched.Email && formik.errors.Email ? (
+                  <div style={{ color: "red" }}>{formik.errors.Email}</div>
+                ) : null}
               </FormGroup>
               <FormGroup>
-                <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      {/* <i className="ni ni-lock-circle-open" /> */}
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    placeholder="Password"
-                    type="password"
-                    autoComplete="new-password"
-                  />
-                </InputGroup>
+                <Label>
+                  Password
+                  {/* <i className="ni ni-lock-circle-open" /> */}
+                </Label>
+
+                <Input
+                  placeholder="Password"
+                  type="password"
+                  name="Password"
+                  autoComplete="new-password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.Password}
+                />
+                {formik.touched.Password && formik.errors.Password ? (
+                  <div style={{ color: "red" }}>{formik.errors.Password}</div>
+                ) : null}
               </FormGroup>
               <div className="text-muted font-italic">
                 <small>
@@ -161,7 +262,7 @@ const Register = () => {
                 </Col>
               </Row>
               <div className="text-center">
-                <Button className="mt-4" color="primary" type="button">
+                <Button className="mt-4" color="primary" type="submit">
                   Create account
                 </Button>
               </div>

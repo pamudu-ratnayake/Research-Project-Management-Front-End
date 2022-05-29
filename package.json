@@ -24,6 +24,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "buffer": "^6.0.3",
     "parcel": "^2.0.0-rc.0",
     "process": "^0.11.10"
   }
