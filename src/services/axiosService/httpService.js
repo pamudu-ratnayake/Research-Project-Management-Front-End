@@ -1,6 +1,6 @@
-import axios from "axios";
+// import axios from "axios";
 
-import API from "../../variables/tokenURL";
+import API from "./tokenURL";
 
 function httpService() {
 
