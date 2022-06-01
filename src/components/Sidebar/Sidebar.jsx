@@ -39,7 +39,7 @@ const Sidebar = (props) => {
   					tag={NavLinkRRD}
   					onClick={closeCollapse}
   					activeClassName="active"
-  					activeClassName="fw-bold"
+  					// activeClassName="fw-bold"
   				>
   					{/* <i className={prop.icon} /> */}
   					<span>{prop.name}</span>

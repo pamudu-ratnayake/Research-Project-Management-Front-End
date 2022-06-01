@@ -24,6 +24,7 @@ import AdminLayout from "./layouts/Admin.jsx";
 import Dasboard from "./views/Dashboard";
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 // import "assets/plugins/nucleo/css/nucleo.css";
 // import "@fortawesome/fontawesome-free/css/all.min.css";
