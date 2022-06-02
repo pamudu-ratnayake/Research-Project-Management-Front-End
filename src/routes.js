@@ -9,6 +9,10 @@ import StaffRegister from "./views/auth/StaffRegister";
 import PublishSubmitLinks from "./views/admin/PublishSubmitLinks";
 import CreatePanel from "./views/admin/CreatePanel";
 import RegisterGroup from "./views/StudentManagement/RegisterGroup";
+import TopicSubmit from "./views/StudentManagement/TopicSubmit";
+import Supervisors from "./views/StudentManagement/Supervisors";
+import StudentProfile from "./views/StudentManagement/StudentProfile";
+import SupervisorRequest from "./views/StudentManagement/SupervisorRequest";
 
 var routes = [
     {
@@ -77,6 +81,30 @@ var routes = [
         component: RegisterGroup,
         layout: "/dashboard"
     },
+  {
+    path: "/topicSubmit",
+    name: "Topic Submit",
+    component: TopicSubmit,
+    layout: "/dashboard",
+  },
+  {
+    path: "/supervisors",
+    name: "Supervisors",
+    component: Supervisors,
+    layout: "/dashboard",
+  },
+  {
+    path: "/studentProfile",
+    name: "Student Profile",
+    component: StudentProfile,
+    layout: "/dashboard",
+  },
+  {
+    path: "/supervisorRequest",
+    name: "Supervisor Request",
+    component: SupervisorRequest,
+    layout: "/dashboard",
+  },
 ];
 
 export default routes;
