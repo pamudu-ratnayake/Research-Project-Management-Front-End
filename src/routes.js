@@ -12,6 +12,10 @@ import RegisterGroup from "./views/StudentManagement/RegisterGroup";
 import TopicSubmit from "./views/StudentManagement/TopicSubmit";
 import StudentProfile from "./views/StudentManagement/StudentProfile";
 import StudentUpdate from "./views/StudentManagement/StudentUpdate";
+import AddStaffDetails from "./views/StaffManagement/AddStaffDetails";
+import UpdateStaffMemberDetails from "./views/StaffManagement/UpdateStaffMemberDetails";
+import DisplayStaffMemberDetails from "./views/StaffManagement/DisplayStaffMemberDetails";
+
 
 var routes = [
     {
@@ -55,6 +59,24 @@ var routes = [
         name: "Register",
         component: StaffRegister,
         layout: "/auth"
+    },
+    {
+        path: "/add-staff-details",
+        name: "Add Staff Details",
+        component: AddStaffDetails,
+        layout: "/dashboard"
+    },
+    {
+        path: "/display-staff-details",
+        name: "Display Staff Details",
+        component: DisplayStaffMemberDetails,
+        layout: "/dashboard"
+    },
+    {
+        path: "/update-staff-details",
+        name: "Update Staff Details",
+        component: UpdateStaffMemberDetails,
+        layout: "/dashboard"
     },
     {
         path: "/test",
