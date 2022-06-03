@@ -18,7 +18,7 @@ import {
   Col,
 } from "reactstrap";
 
-const Register = () => {
+const StudentRegister = () => {
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -118,7 +118,7 @@ const Register = () => {
                       </InputGroupAddon>
                       <Input
                         name="firstName"
-                        placeholder="First Name"
+                        placeholder="First Name Student"
                         type="text"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -308,4 +308,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default StudentRegister;

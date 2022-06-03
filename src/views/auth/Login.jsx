@@ -1,6 +1,8 @@
 import httpService from "../../services/axiosService/httpService";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 
 import {
   Button,
@@ -31,6 +33,8 @@ const Login = () => {
     password: Yup.string().required("*Please Enter Password!"),
   });
 
+  let history = useHistory();
+
   const onSubmit = (values) => {
     httpService
       .postAxios("/auth-user/login", values)
@@ -40,11 +44,21 @@ const Login = () => {
         localStorage.setItem("profile", JSON.stringify(res.data));
         const user = JSON.parse(localStorage.getItem("profile"));
         console.log(user?.result?.user_type);
-        // if (user?.result?.user_type === "customer") {
-        //   history.push({
-        //     pathname: `/customer`,
-        //   });
-        // }
+        if (user?.result?.user_type === "Student") {
+          history.push({
+            pathname: `/student`,
+          });
+        }
+        if (user?.result?.user_type === "Staff") {
+          history.push({
+            pathname: `/staff`,
+          });
+        }
+        if (user?.result?.user_type === "Admin") {
+          history.push({
+            pathname: `/admin`,
+          });
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -173,19 +187,19 @@ const Login = () => {
             <a
               className="text-light"
               href="#pablo"
-              onClick={(e) => e.preventDefault()}
             >
               <small>Forgot password?</small>
             </a>
           </Col>
           <Col className="text-right" xs="6">
+            <Link to="/auth/register-all">
             <a
               className="text-light"
               href="#pablo"
-              onClick={(e) => e.preventDefault()}
-            >
+              >
               <small>Create new account</small>
             </a>
+              </Link>
           </Col>
         </Row>
       </Col>

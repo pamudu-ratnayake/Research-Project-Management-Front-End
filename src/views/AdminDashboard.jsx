@@ -3,14 +3,14 @@ import React from 'react';
 import { Button } from "reactstrap";
 
 
-const Dashboard = (props) => {
+const AdminDashboard = (props) => {
 
     return (
         <>
             <h1>Hello React!</h1>
-            <Button>Click Here</Button>
+            <Button>Admin Here</Button>
         </>
     )
 }
 
-export default Dashboard;
+export default AdminDashboard;

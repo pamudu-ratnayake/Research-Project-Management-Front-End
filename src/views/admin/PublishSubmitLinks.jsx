@@ -13,9 +13,6 @@ import {
   Container,
   Row,
   Col,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
 } from "reactstrap";
 
 const PublishSubmitLinks = (props) => {
