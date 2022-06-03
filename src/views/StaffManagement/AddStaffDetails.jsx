@@ -17,8 +17,22 @@ import {
   import httpService from "../../services/axiosService/httpService";
   import * as Yup from "yup";
   import { useFormik } from "formik";
+import { useEffect, useState } from "react";
 
 const AddStaffDetails = (props) => {
+
+  const [userDetail, setDetail] = useState([]);
+
+  useEffect(() => {
+    httpService.getAxios(`/auth-user/get-oneuser`)
+    .then((res) => {
+      console.log (res.data);
+      setDetail(res.data);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+  },);
 
   const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -119,7 +133,7 @@ const AddStaffDetails = (props) => {
                           type="text"
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          value={formik.values.staff_FName}
+                          defaultvalue={userDetail.firstName}
                         />
                         {formik.touched.staff_FName && formik.errors.staff_FName ? (
                           <div style={{ color: "red" }}>
@@ -138,7 +152,7 @@ const AddStaffDetails = (props) => {
                           type="text"
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          value={formik.values.staff_LName }
+                          defaultvalue={userDetail.lastName }
                         />
                         {formik.touched.staff_LName &&
                         formik.errors.staff_LName ? (
@@ -230,7 +244,7 @@ const AddStaffDetails = (props) => {
                         type="text"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.staff_email}
+                        defaultvalue={formik.values.email}
                       />
                       {formik.touched.staff_email &&
                       formik.errors.staff_email ? (
