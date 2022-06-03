@@ -78,25 +78,25 @@ var routes = [
         path: "/registerGroup",
         name: "Register Group",
         component: RegisterGroup,
-        layout: "/dashboard"
+        layout: "/student"
     },
   {
     path: "/topicSubmit",
     name: "Topic Submit",
     component: TopicSubmit,
-    layout: "/dashboard",
+    layout: "/student",
   },
   {
     path: "/studentProfile",
     name: "Student Profile",
     component: StudentProfile,
-    layout: "/dashboard",
+    layout: "/student",
   },
   {
     path: "/studentUpdate",
     name: "Student Update",
     component: StudentUpdate,
-    layout: "/dashboard",
+    layout: "/student",
   },
 ];
 

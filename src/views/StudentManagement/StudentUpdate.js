@@ -25,20 +25,20 @@ import {
 const StudentUpdate = (props) => {
   // const user = JSON.parse(localStorage.getItem("profile"));
 
-  const [student, setStudent] = useState("");
+  const [student, setStudent] = useState([]);
   const [oneUser, setOneUser] = useState(0);
 
   const initialValues = {
     enableReinitialize: true,
     validateOnMount: true,
-    Name: "",
-    Registration_no: "",
-    Faculty: "",
-    Email: "",
-    Gender: "",
-    Date_of_birth: "",
-    address: "",
-    contact_No: "",
+    Name: student.Name,
+    Registration_no: student.Registration_no,
+    Faculty: student.Faculty,
+    Email: student.Email,
+    Gender: student.Gender,
+    Date_of_birth: student.Date_of_birth,
+    address: student.address,
+    contact_No: student.contact_No,
   };
 
   const validationSchema = Yup.object({
@@ -111,7 +111,7 @@ const StudentUpdate = (props) => {
                   name="Name"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.Name}
+                  defaultValue={student.Name}
                 />
                 {formik.touched.Name && formik.errors.Name ? (
                   <div style={{ color: "red" }}>{formik.errors.Name}</div>
@@ -126,7 +126,7 @@ const StudentUpdate = (props) => {
                   name="Registration_no"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.Registration_no}
+                  defaultValue={student.Registration_no}
                 />
                 {formik.touched.Registration_no &&
                 formik.errors.Registration_no ? (
@@ -143,7 +143,7 @@ const StudentUpdate = (props) => {
                   name="Faculty"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.Faculty}
+                  defaultValue={student.Faculty}
                 >
                   <option>Choose...</option>
                   <option>Computing</option>
@@ -166,7 +166,7 @@ const StudentUpdate = (props) => {
                   autoComplete="new-email"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.Email}
+                  defaultValue={student.Email}
                 />
                 {formik.touched.Email && formik.errors.Email ? (
                   <div style={{ color: "red" }}>{formik.errors.Email}</div>
@@ -180,7 +180,7 @@ const StudentUpdate = (props) => {
                   name="Gender"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.Gender}
+                  defaultValue={student.Gender}
                 >
                   <option>Choose...</option>
                   <option>Male</option>
@@ -198,7 +198,7 @@ const StudentUpdate = (props) => {
                   name="Date_of_birth"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.Date_of_birth}
+                  defaultValue={student.Date_of_birth}
                 />
                 {formik.touched.Date_of_birth && formik.errors.Date_of_birth ? (
                   <div style={{ color: "red" }}>{formik.errors.Date_of_birth}</div>
@@ -212,7 +212,7 @@ const StudentUpdate = (props) => {
                   name="address"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.address}
+                  defaultValue={student.address}
                 />
                 {formik.touched.address && formik.errors.address ? (
                   <div style={{ color: "red" }}>{formik.errors.address}</div>
@@ -226,7 +226,7 @@ const StudentUpdate = (props) => {
                   name="contact_No"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.contact_No}
+                  defaultValue={student.contact_No}
                 />
                 {formik.touched.contact_No && formik.errors.contact_No ? (
                   <div style={{ color: "red" }}>{formik.errors.contact_No}</div>

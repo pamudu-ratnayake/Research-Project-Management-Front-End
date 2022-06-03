@@ -16,7 +16,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import httpService from "../../services/axiosService/httpService";
 
-const TopicSubmit = () => {
+const AssignmentSubmit = () => {
   const initialValues = {
     topic: "",
     description: "",
@@ -236,4 +236,4 @@ const TopicSubmit = () => {
   );
 };
 
-export default TopicSubmit;
+export default AssignmentSubmit;
