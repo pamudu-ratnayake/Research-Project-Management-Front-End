@@ -10,9 +10,8 @@ import PublishSubmitLinks from "./views/admin/PublishSubmitLinks";
 import CreatePanel from "./views/admin/CreatePanel";
 import RegisterGroup from "./views/StudentManagement/RegisterGroup";
 import TopicSubmit from "./views/StudentManagement/TopicSubmit";
-import Supervisors from "./views/StudentManagement/Supervisors";
 import StudentProfile from "./views/StudentManagement/StudentProfile";
-import SupervisorRequest from "./views/StudentManagement/SupervisorRequest";
+import StudentUpdate from "./views/StudentManagement/StudentUpdate";
 
 var routes = [
     {
@@ -88,21 +87,15 @@ var routes = [
     layout: "/dashboard",
   },
   {
-    path: "/supervisors",
-    name: "Supervisors",
-    component: Supervisors,
-    layout: "/dashboard",
-  },
-  {
     path: "/studentProfile",
     name: "Student Profile",
     component: StudentProfile,
     layout: "/dashboard",
   },
   {
-    path: "/supervisorRequest",
-    name: "Supervisor Request",
-    component: SupervisorRequest,
+    path: "/studentUpdate",
+    name: "Student Update",
+    component: StudentUpdate,
     layout: "/dashboard",
   },
 ];

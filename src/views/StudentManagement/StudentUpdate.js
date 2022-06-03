@@ -22,15 +22,15 @@ import {
 // core components
 // import API from "variables/tokenURL";
 
-const StudentProfile = (props) => {
+const StudentUpdate = (props) => {
   // const user = JSON.parse(localStorage.getItem("profile"));
 
-  const [customer, setCustomer] = useState("");
+  const [student, setStudent] = useState("");
   const [oneUser, setOneUser] = useState(0);
 
   const initialValues = {
-    // enableReinitialize: true,
-    // validateOnMount: true,
+    enableReinitialize: true,
+    validateOnMount: true,
     Name: "",
     Registration_no: "",
     Faculty: "",
@@ -52,10 +52,22 @@ const StudentProfile = (props) => {
     contact_No: Yup.string().required("Required"),
   });
 
+  useEffect(() => {
+    httpService.getAxios(`/student/getOneStudentDetails/6298feccb1acd547d2b60440`).then(
+      (res) => {
+        console.log(res);
+        setStudent(res.data);
+     
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}, []);
+
   const onSubmit = (values) => {
     console.log("form data", values);
 
-    httpService.postAxios(`/student/addStudentiDetails`, values)
+    httpService.putAxios(`/student/updateStudentDetails/6298feccb1acd547d2b60440`, values)
       .then((res) => {
         console.log(res);
         console.log("Data", formdata);
@@ -69,7 +81,7 @@ const StudentProfile = (props) => {
       });
 
     alert("");
-    window.location.reload(false);
+    // window.location.reload(false);
   };
 
   const formik = useFormik({
@@ -78,22 +90,6 @@ const StudentProfile = (props) => {
     validationSchema,
   });
 
-  useEffect(() => {
-    httpService.getAxios(`/auth-user/get-user`)
-    .then((res) => {
-      console.log(res);
-      setOneUser(res.data);
-      httpService.getAxios(`/customerdetails/getOneCustomer/${user?.result?._id}`).then(
-        (res) => {
-          console.log(res);
-          setCustomer(res.data);
-        }
-      );
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }, []);
 
 
   // console.log("sdsad", oneUser.firstName);
@@ -103,7 +99,7 @@ const StudentProfile = (props) => {
       <div>
         <Card body>
           <CardHeader>
-            <CardTitle tag="h5">Student Profile</CardTitle>
+            <CardTitle tag="h5">Student Update</CardTitle>
           </CardHeader>
           <CardBody>
             <Form onSubmit={formik.handleSubmit}>
@@ -248,4 +244,4 @@ const StudentProfile = (props) => {
   );
 };
 
-export default StudentProfile;
+export default StudentUpdate;

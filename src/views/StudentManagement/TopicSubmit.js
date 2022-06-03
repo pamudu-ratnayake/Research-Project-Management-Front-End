@@ -34,7 +34,7 @@ const TopicSubmit = () => {
     description: Yup.string().required("*Required!"),
     // document: Yup.string().required("*Required!"),
     // supervisors: Yup.string().required("*Required!"),
-    co_supervisors: Yup.string().required("*Required!"),
+    // co_supervisors: Yup.string().required("*Required!"),
   });
 
   const onSubmit = (values) => {
