@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import httpService from "../../services/axiosService/httpService";
 
 import {
   Button,
@@ -20,18 +21,25 @@ const PublishSubmitLinks = (props) => {
     enableReinitialize: true,
     validateOnMount: true,
     title: "",
-    date: "",
+    due_date: "",
     description: ""
   };
 
   const validationSchema = Yup.object({
-    title: Yup.string().required("*Required!"),
-    date: Yup.string().required("*Required!"),
-    description: Yup.string().required("*Required!"),
+    // title: Yup.string().required("*Required!"),
+    // date: Yup.string().required("*Required!"),
+    // description: Yup.string().required("*Required!"),
   });
 
   const onSubmit = (values) => {
-    console.log('fdsfsd',values);
+    console.log('values are: ', values);
+    httpService.postAxios(`/admin/create-submit`, values)
+    .then((res) => {
+      console.log(res.data)
+    })
+    .catch((err) => {
+      console.error(err);
+    })
   };
 
   const formik = useFormik({
@@ -82,10 +90,10 @@ const PublishSubmitLinks = (props) => {
                           id="exampleFormControlInput1"
                           placeholder="Status"
                           type="text"
-                          name="date" 
+                          name="due_date" 
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          value={formik.values.date}>
+                          value={formik.values.due_date}>
                         </Input>
                       </FormGroup>
                     </Col>

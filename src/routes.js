@@ -2,12 +2,15 @@ import AdminDashboard from "./views/AdminDashboard";
 import StaffDashboard from "./views/StaffDashboard";
 import StudentDashboard from "./views/StudentDashboard";
 import AllSignUps from "./views/auth/AllSignUps";
-import Test from "./views/Test";
 import Login from "./views/auth/Login";
 import StudentRegister from "./views/auth/StudentRegister";
 import StaffRegister from "./views/auth/StaffRegister";
 import PublishSubmitLinks from "./views/admin/PublishSubmitLinks";
 import CreatePanel from "./views/admin/CreatePanel";
+import ViewPanels from "./views/admin/ViewPanels";
+import ViewAllSubmitLinks from "./views/admin/ViewAllSubmitLinks";
+import UploadTemplates from "./views/admin/UploadTemplates";
+
 import RegisterGroup from "./views/StudentManagement/RegisterGroup";
 import TopicSubmit from "./views/StudentManagement/TopicSubmit";
 import StudentProfile from "./views/StudentManagement/StudentProfile";
@@ -98,9 +101,27 @@ var routes = [
         layout: "/admin"
     },
     {
+        path: "/viewlinks",
+        name: "All Published Links",
+        component: ViewAllSubmitLinks,
+        layout: "/admin"
+    },
+    {
         path: "/create-panel",
         name: "Create Panel",
         component: CreatePanel,
+        layout: "/admin"
+    },
+    {
+        path: "/viewAll-panels",
+        name: "All Panel",
+        component: ViewPanels,
+        layout: "/admin"
+    },
+    {
+        path: "/upload-template",
+        name: "Upload Templates",
+        component: UploadTemplates,
         layout: "/admin"
     },
     {
