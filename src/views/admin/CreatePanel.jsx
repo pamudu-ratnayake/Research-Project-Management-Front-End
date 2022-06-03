@@ -2,6 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
+import httpService from "../../services/axiosService/httpService";
 
 import {
   Button,
@@ -14,34 +15,49 @@ import {
   Container,
   Row,
   Col,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
 } from "reactstrap";
 
 const CreatePanel = (props) => {
+
+  const [panelMembers, setPanelMembers] = useState([]);
+
   const initialValues = {
     enableReinitialize: true,
     validateOnMount: true,
     panel_no: "",
     research_area: "",
     no_of_members: 0,
-    members: "",
-    con_no: "",
-    emails: "",
+    members: [],
+    // con_no: "",
+    // emails: "",
   };
 
   const validationSchema = Yup.object({
-    panel_no: Yup.string().required("*Required!"),
-    research_area: Yup.string().required("*Required!"),
-    no_of_members: Yup.string().required("*Required!"),
-    members: Yup.string().required("*Required!"),
-    con_no: Yup.string().required("*Required!"),
-    emails: Yup.string().required("*Required!"),
+    // panel_no: Yup.string().required("*Required!"),
+    // research_area: Yup.string().required("*Required!"),
+    // no_of_members: Yup.string().required("*Required!"),
+    // members: Yup.string().required("*Required!"),
+    // con_no: Yup.string().required("*Required!"),
+    // emails: Yup.string().required("*Required!"),
   });
 
   const onSubmit = (values) => {
-    console.log("fdsfsd", values);
+    const panelData = {
+      panel_no : values.panel_no,
+      research_area : values.research_area,
+      members : panelMembers,
+      no_of_members : panelMembers.length
+    };
+    // values.no_of_members = panelMembers.length;
+    // values.members = panelMembers;
+    console.log("values are: ", panelData)
+    httpService.postAxios('/admin/create-panel', panelData)
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
   };
 
   const formik = useFormik({
@@ -50,30 +66,18 @@ const CreatePanel = (props) => {
     validationSchema,
   });
 
-  const [panelMembers, setPanelMembers] = useState([]);
-
-  const addMembers = async (formData) => {
-    // await event.preventDefault();
-
-    // const formData = event.target;
+  const addMembers = (formData) => {
     const members = {
       member_name: formData.member_name,
       con_no: formData.con_no,
       email: formData.email,
     };
-
-    console.log("formmm data: ", members);
-
     setPanelMembers([...panelMembers, members]);
-    console.log(panelMembers);
   };
 
   const deleteMember = (itemIndex) => {
-    console.log(itemIndex);
-
-    const filtered = [...panelMembers].filter((c) => c.index !== itemIndex);
-    console.log(filtered);
-    setPanelMembers(filtered);
+    panelMembers.splice(itemIndex, 1);
+    setPanelMembers([...panelMembers]);
   };
 
   return (
@@ -93,19 +97,26 @@ const CreatePanel = (props) => {
                 <Form onSubmit={formik.handleSubmit}>
                   <Row>
                     <Col md="6">
-                      <FormGroup>
-                        <label>Research Area</label>
+                    <FormGroup>
+                        <label>Research Area{formik.no_of_members}</label>
                         <Input
                           id="exampleFormControlInput1"
-                          placeholder="Submission Title"
-                          type="text"
+                          placeholder="Enter Research Area"
+                          type="select"
                           name="research_area"
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
                           value={formik.values.research_area}
-                        />
-                        {formik.touched.research_area &&
-                        formik.errors.research_area ? (
+                        >
+                          <option>Choose...</option>
+                          <option>Autonomous Intelligent Machines and Systems (AIMS)</option>
+                          <option>Machine Learning and Soft Computing (MLSC)</option>
+                          <option>Knowledge Inspired Computing (KIC)</option>
+                          <option>Computing for Inclusive and Equitable Society (CIEC)</option>
+                          <option>Computing Infrastructure and Security (CIS)</option>
+                          <option>Software Systems & Technologies (SST)</option>
+                        </Input>
+                        {formik.touched.research_area && formik.errors.research_area ? (
                           <div style={{ color: "red" }}>
                             {formik.errors.research_area}
                           </div>
@@ -202,18 +213,23 @@ const CreatePanel = (props) => {
                     Add Member
                   </Button>
 
-                  {panelMembers.map((member, index) => {
+                  {panelMembers && panelMembers.map((member, index) => {
                     return (
                       <Row key={index}>
-                        <Col xs="">
-                          <span className="h5">{member.member_name}</span>
+                        <hr/>
+                        <Col xs="4" className="mb-3">
+                          <span className="h5">{member?.member_name}</span>
                         </Col>
-                        <Col xs="">
-                          <span className="h5">{member.con_no}</span>
+                        <Col xs="3" className="mb-3">
+                          <span className="h5">{member?.con_no}</span>
                         </Col>
-                        <Col xs="">
-                          <span className="h5">{member.email}</span>
+                        <Col xs="4" className="mb-3">
+                          <span className="h5">{member?.email}</span>
                         </Col>
+                        <Col xs="1" className="mb-3">
+                          <span className="h5" onClick={() => {deleteMember(index)}}>X</span>
+                        </Col>
+                        <hr/>
                       </Row>
                     );
                   })}

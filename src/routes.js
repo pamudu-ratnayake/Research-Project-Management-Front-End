@@ -1,46 +1,74 @@
-import Dashboard from "./views/Dashboard";
+import AdminDashboard from "./views/AdminDashboard";
+import StaffDashboard from "./views/StaffDashboard";
+import StudentDashboard from "./views/StudentDashboard";
+import AllSignUps from "./views/auth/AllSignUps";
 import Test from "./views/Test";
 import Login from "./views/auth/Login";
-import Register from "./views/auth/Register";
+import StudentRegister from "./views/auth/StudentRegister";
+import StaffRegister from "./views/auth/StaffRegister";
 import PublishSubmitLinks from "./views/admin/PublishSubmitLinks";
 import CreatePanel from "./views/admin/CreatePanel";
 
 var routes = [
     {
-        path: "/my-dashboard",
+        path: "/admin-dashboard",
         name: "Dashboard",
-        component: Dashboard,
-        layout: "/dashboard"
+        component: AdminDashboard,
+        layout: "/admin"
+    },
+    {
+        path: "/staff-dashboard",
+        name: "Dashboard",
+        component: StaffDashboard,
+        layout: "/staff"
+    },
+    {
+        path: "/student-dashboard",
+        name: "Dashboard",
+        component: StudentDashboard,
+        layout: "/student"
+    },
+    {
+        path: "/register-all",
+        name: "Dashboard",
+        component: AllSignUps,
+        layout: "/auth"
     },
     {
         path: "/login",
         name: "Login",
         component: Login,
-        layout: "/dashboard"
+        layout: "/auth"
     },
     {
-        path: "/register",
+        path: "/student-register",
         name: "Register",
-        component: Register,
-        layout: "/dashboard"
+        component: StudentRegister,
+        layout: "/auth"
+    },
+    {
+        path: "/staff-register",
+        name: "Register",
+        component: StaffRegister,
+        layout: "/auth"
     },
     {
         path: "/test",
         name: "Test",
         component: Test,
-        layout: "/dashboard"
+        layout: "/admin"
     },
     {
         path: "/publishlinks",
         name: "Publish Links",
         component: PublishSubmitLinks,
-        layout: "/dashboard"
+        layout: "/admin"
     },
     {
         path: "/create-panel",
         name: "Create Panel",
         component: CreatePanel,
-        layout: "/dashboard"
+        layout: "/admin"
     },
 ];
 

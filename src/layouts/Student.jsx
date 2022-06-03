@@ -8,7 +8,7 @@ import Sidebar from "../components/Sidebar/Sidebar.jsx";
 
 import routes from "../routes";
 
-const Admin = (props) => {
+const StudentLayout = (props) => {
   const mainContent = React.useRef(null);
   const location = useLocation();
 
@@ -20,7 +20,7 @@ const Admin = (props) => {
 
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/student") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -68,7 +68,7 @@ const Admin = (props) => {
         /> */}
         <Switch>
           {getRoutes(routes)}
-          <Redirect from="*" to="/admin/admin-dashboard" />
+          <Redirect from="*" to="/student/student-dashboard" />
         </Switch>
         <Container fluid>
           {/* <AdminFooter /> */}
@@ -78,4 +78,4 @@ const Admin = (props) => {
   );
 };
 
-export default Admin;
+export default StudentLayout;
