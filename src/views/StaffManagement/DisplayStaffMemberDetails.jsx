@@ -17,8 +17,9 @@ import {
 const DisplayStaffMemberDetails = (props) => {
 
   const [memberData, setMember] = useState([]);
+  
   useEffect(() => {
-    httpService.getAxios(`/staffMember/getOneStaffMember/6297cd503b5fb5b74ac84b8a`)
+    httpService.getAxios(`/staffMember/get-StaffMembers`)
       .then((res) => {
         console.log(res);
         setMember(res.data);

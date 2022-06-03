@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import httpService from "../../services/axiosService/httpService";
 

@@ -15,6 +15,7 @@ import StudentUpdate from "./views/StudentManagement/StudentUpdate";
 import AddStaffDetails from "./views/StaffManagement/AddStaffDetails";
 import UpdateStaffMemberDetails from "./views/StaffManagement/UpdateStaffMemberDetails";
 import DisplayStaffMemberDetails from "./views/StaffManagement/DisplayStaffMemberDetails";
+import Topics from "./views/StaffManagement/Topics";
 
 
 var routes = [
@@ -25,9 +26,15 @@ var routes = [
         layout: "/admin"
     },
     {
-        path: "/staff-dashboard",
+        path: "/staff-dashboard-topic",
         name: "Dashboard",
         component: StaffDashboard,
+        layout: "/staff"
+    },
+    {
+        path: "/staff-dashboard",
+        name: "Topic List",
+        component: Topics,
         layout: "/staff"
     },
     {
@@ -64,19 +71,19 @@ var routes = [
         path: "/add-staff-details",
         name: "Add Staff Details",
         component: AddStaffDetails,
-        layout: "/dashboard"
+        layout: "/staff"
     },
     {
         path: "/display-staff-details",
         name: "Display Staff Details",
         component: DisplayStaffMemberDetails,
-        layout: "/dashboard"
+        layout: "/staff"
     },
     {
         path: "/update-staff-details",
         name: "Update Staff Details",
         component: UpdateStaffMemberDetails,
-        layout: "/dashboard"
+        layout: "/staff"
     },
     {
         path: "/test",
