@@ -8,6 +8,10 @@ import StudentRegister from "./views/auth/StudentRegister";
 import StaffRegister from "./views/auth/StaffRegister";
 import PublishSubmitLinks from "./views/admin/PublishSubmitLinks";
 import CreatePanel from "./views/admin/CreatePanel";
+import RegisterGroup from "./views/StudentManagement/RegisterGroup";
+import TopicSubmit from "./views/StudentManagement/TopicSubmit";
+import StudentProfile from "./views/StudentManagement/StudentProfile";
+import StudentUpdate from "./views/StudentManagement/StudentUpdate";
 
 var routes = [
     {
@@ -70,6 +74,30 @@ var routes = [
         component: CreatePanel,
         layout: "/admin"
     },
+    {
+        path: "/registerGroup",
+        name: "Register Group",
+        component: RegisterGroup,
+        layout: "/student"
+    },
+  {
+    path: "/topicSubmit",
+    name: "Topic Submit",
+    component: TopicSubmit,
+    layout: "/student",
+  },
+  {
+    path: "/studentProfile",
+    name: "Student Profile",
+    component: StudentProfile,
+    layout: "/student",
+  },
+  {
+    path: "/studentUpdate",
+    name: "Student Update",
+    component: StudentUpdate,
+    layout: "/student",
+  },
 ];
 
 export default routes;
