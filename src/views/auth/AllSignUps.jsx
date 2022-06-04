@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link ,useHistory} from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -7,7 +8,7 @@ import Box from "@material-ui/core/Box";
 import StudentRegister from "./StudentRegister";
 import StaffRegister from "./StaffRegister";
 
-import { Col } from "reactstrap";
+import { Col, Row } from "reactstrap";
 
 const AllSignUps = () => {
   const [value, setValue] = useState(0);
@@ -44,6 +45,18 @@ const AllSignUps = () => {
       <TabPanel value={value} index={1}>
         <StaffRegister />
       </TabPanel>
+      <Row className="mt-3">
+          <Col className="text-center" xs="6">
+            <Link to="/auth/login">
+            <a
+              className="text-light"
+              href="#pablo"
+              >
+              <small>Already Have An Account</small>
+            </a>
+              </Link>
+          </Col>
+        </Row>
     </Col>
     </div>
   );

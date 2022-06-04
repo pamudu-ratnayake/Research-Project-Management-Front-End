@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import httpService from "../../services/axiosService/httpService";
 
 import {
@@ -20,6 +21,23 @@ import {
 const CreatePanel = (props) => {
 
   const [panelMembers, setPanelMembers] = useState([]);
+  const [staff, setStaff] = useState([]);
+  const [panelMemberDetails, setPanelMemDetails] = useState({
+    idL: null,
+    staff_contact_no: "Select Panel Member",
+    staff_email: "Select Panel Member"
+  });
+
+  useEffect(() => {
+    httpService.getAxios('/staffMember/get-StaffMembers')
+    .then((res) => {
+      console.log(res.data);
+      setStaff(res.data);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+  },[]);
 
   const initialValues = {
     enableReinitialize: true,
@@ -28,8 +46,6 @@ const CreatePanel = (props) => {
     research_area: "",
     no_of_members: 0,
     members: [],
-    // con_no: "",
-    // emails: "",
   };
 
   const validationSchema = Yup.object({
@@ -41,6 +57,8 @@ const CreatePanel = (props) => {
     // emails: Yup.string().required("*Required!"),
   });
 
+  let history = useHistory();
+
   const onSubmit = (values) => {
     const panelData = {
       panel_no : values.panel_no,
@@ -48,12 +66,12 @@ const CreatePanel = (props) => {
       members : panelMembers,
       no_of_members : panelMembers.length
     };
-    // values.no_of_members = panelMembers.length;
-    // values.members = panelMembers;
-    console.log("values are: ", panelData)
     httpService.postAxios('/admin/create-panel', panelData)
     .then((res) => {
       console.log(res.data);
+      history.push({
+        pathname: `/admin/viewAll-panels`,
+      });
     })
     .catch((err) => {
       console.error(err);
@@ -66,19 +84,25 @@ const CreatePanel = (props) => {
     validationSchema,
   });
 
-  const addMembers = (formData) => {
-    const members = {
-      member_name: formData.member_name,
-      con_no: formData.con_no,
-      email: formData.email,
-    };
-    setPanelMembers([...panelMembers, members]);
+  const addMembers = () => {
+    setPanelMembers([...panelMembers, panelMemberDetails]);
   };
 
   const deleteMember = (itemIndex) => {
     panelMembers.splice(itemIndex, 1);
     setPanelMembers([...panelMembers]);
   };
+
+  const loadPanelMemberValues = (e) => {
+    console.log(e.target.value)
+
+    setPanelMemDetails({
+      id: staff[e.target.value]._id,
+      member_name: `${staff[e.target.value].staff_FName} ${staff[e.target.value].staff_LName}`,
+      con_no: staff[e.target.value].staff_contact_no,
+      email: staff[e.target.value].staff_email
+    });
+  }
 
   return (
     <>
@@ -98,7 +122,7 @@ const CreatePanel = (props) => {
                   <Row>
                     <Col md="6">
                     <FormGroup>
-                        <label>Research Area{formik.no_of_members}</label>
+                        <label>Research Area</label>
                         <Input
                           id="exampleFormControlInput1"
                           placeholder="Enter Research Area"
@@ -129,7 +153,7 @@ const CreatePanel = (props) => {
                         <label>Panel Number</label>
                         <Input
                           id="exampleFormControlInput1"
-                          placeholder="Status"
+                          placeholder="Panel Number"
                           type="text"
                           name="panel_no"
                           onChange={formik.handleChange}
@@ -142,23 +166,24 @@ const CreatePanel = (props) => {
                   <Row>
                     <Col md="4">
                       <FormGroup>
-                        <label>Member Name {formik.no_of_members}</label>
+                        <label>Member Name</label>
                         <Input
                           id="exampleFormControlInput1"
                           placeholder="Enter Location"
                           type="select"
                           name="member_name"
-                          onChange={formik.handleChange}
+                          onChange={loadPanelMemberValues}
                           onBlur={formik.handleBlur}
-                          value={formik.values.member1}
+                          value={formik.values.member_name}
                         >
-                          <option>Choose...</option>
-                          <option>Indoor</option>
-                          <option>Outdoor</option>
+                          <option value={-1}>Choose...</option>
+                          {staff.map((member, index) => (
+                            <option key={member._id} value={index}>{`${member.staff_FName} ${member.staff_LName}`}</option>
+                          ))}
                         </Input>
-                        {formik.touched.member1 && formik.errors.member1 ? (
+                        {formik.touched.member_name && formik.errors.member_name ? (
                           <div style={{ color: "red" }}>
-                            {formik.errors.member1}
+                            {formik.errors.member_name}
                           </div>
                         ) : null}
                       </FormGroup>
@@ -168,13 +193,14 @@ const CreatePanel = (props) => {
                         <label>Contact Number</label>
                         <Input
                           id="exampleFormControlInput1"
-                          placeholder="Contact Number"
+                          placeholder="Email"
                           type="text"
                           name="con_no"
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          value={formik.values.con_no}
-                        />
+                          value={panelMemberDetails.con_no}
+                          // defaultValue={memberDetails.con_no}
+                        disabled/>
                         {formik.touched.con_no && formik.errors.con_no ? (
                           <div style={{ color: "red" }}>
                             {formik.errors.con_no}
@@ -192,8 +218,8 @@ const CreatePanel = (props) => {
                           name="email"
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          value={formik.values.email}
-                        />
+                          value={panelMemberDetails.email}
+                        disabled/>
                         {formik.touched.email && formik.errors.email ? (
                           <div style={{ color: "red" }}>
                             {formik.errors.email}
@@ -213,7 +239,7 @@ const CreatePanel = (props) => {
                     Add Member
                   </Button>
 
-                  {panelMembers && panelMembers.map((member, index) => {
+                  {panelMembers?.map((member, index) => {
                     return (
                       <Row key={index}>
                         <hr/>

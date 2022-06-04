@@ -13,6 +13,7 @@ function httpService() {
   }
 
   function deleteAxios(url) {
+    console.log("url is: ", url);
     return API({
       url: url,
       method: "DELETE",

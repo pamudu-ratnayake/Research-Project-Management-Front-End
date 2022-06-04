@@ -1,6 +1,8 @@
 import React from "react";
 import { useFormik } from "formik";
+import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
+import httpService from "../../services/axiosService/httpService";
 
 import {
   Button,
@@ -11,6 +13,7 @@ import {
   Form,
   Input,
   Container,
+  Label,
   Row,
   Col,
 } from "reactstrap";
@@ -20,18 +23,31 @@ const PublishSubmitLinks = (props) => {
     enableReinitialize: true,
     validateOnMount: true,
     title: "",
-    date: "",
-    description: ""
+    due_date: "",
+    description: "",
   };
 
   const validationSchema = Yup.object({
-    title: Yup.string().required("*Required!"),
-    date: Yup.string().required("*Required!"),
-    description: Yup.string().required("*Required!"),
+    // title: Yup.string().required("*Required!"),
+    // date: Yup.string().required("*Required!"),
+    // description: Yup.string().required("*Required!"),
   });
 
+  let history = useHistory();
+
   const onSubmit = (values) => {
-    console.log('fdsfsd',values);
+    console.log("values are: ", values);
+    httpService
+      .postAxios(`/admin/create-submit`, values)
+      .then((res) => {
+        console.log(res.data);
+        history.push({
+          pathname: `admin/viewlinks`,
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const formik = useFormik({
@@ -58,7 +74,7 @@ const PublishSubmitLinks = (props) => {
                   <Row>
                     <Col md="6">
                       <FormGroup>
-                        <label>Title</label>
+                        <Label>Title</Label>
                         <Input
                           id="exampleFormControlInput1"
                           placeholder="Submission Title"
@@ -77,23 +93,27 @@ const PublishSubmitLinks = (props) => {
                     </Col>
                     <Col md="6">
                       <FormGroup>
-                        <label>Due Date</label>
+                        <Label>Date of Birth</Label>
                         <Input
-                          id="exampleFormControlInput1"
-                          placeholder="Status"
-                          type="text"
-                          name="date" 
+                          placeholder="Due Date"
+                          type="date"
+                          name="due_date"
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          value={formik.values.date}>
-                        </Input>
+                          value={formik.values.due_date}
+                        />
+                        {formik.touched.due_date && formik.errors.due_date ? (
+                          <div style={{ color: "red" }}>
+                            {formik.errors.due_date}
+                          </div>
+                        ) : null}
                       </FormGroup>
                     </Col>
                   </Row>
                   <Row>
                     <Col md="10">
                       <FormGroup>
-                        <label>Description</label>
+                        <Label>Description</Label>
                         <Input
                           id="exampleFormControlTextarea1"
                           placeholder="Description..."

@@ -9,14 +9,41 @@ import {
   Input,
   FormText,
   Label,
-  CardText,
+  Row,
+  Col,
 } from "reactstrap";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import httpService from "../../services/axiosService/httpService";
 
 const TopicSubmit = () => {
+
+  const user = JSON.parse(localStorage.getItem("profile"));
+
+  const [staff, setStaff] = useState([]);
+  const [stdGrp, setStdGrp] = useState([]);
+
+  useEffect(() => {
+    httpService.getAxios('/staffMember/get-StaffMembers')
+    .then((res) => {
+      console.log(res.data);
+      setStaff(res.data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+
+    httpService.getAxios(`/studentgroup/getOneStudentGroupDetails/${user?.result?._id}`)
+    .then((res) => {
+      console.log(res.data[0]._id);
+      setStdGrp(res.data[0]._id);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  },[]);
+
   const initialValues = {
     topic: "",
     description: "",
@@ -34,12 +61,14 @@ const TopicSubmit = () => {
   });
 
   const onSubmit = (values) => {
+
     const topicDetails = {
       topic: values.topic,
       description: values.description,
       document: values.document,
-      supervisors: supervisor,
-      co_supervisors: cosupervisor,
+      supervisors: supId,
+      co_supervisors: coSupId,
+      research_grp_id: stdGrp
     }
     console.log("triggered", topicDetails);
     httpService
@@ -60,28 +89,33 @@ const TopicSubmit = () => {
 
   const [supervisor, setSupervisor] = useState([]);
   const [cosupervisor, setCoSupervisor] = useState([]);
+  const [supId, setSupId] = useState([]);
+  const [coSupId, setCoSupId] = useState([]);
 
-  const addSupervisor = (supervisorDetail) => {
-    console.log("data :", supervisorDetail);
+  const loadSupName = (e) => {
+    const supName = `${staff[e.target.value].staff_FName} ${staff[e.target.value].staff_LName}`
+    setSupervisor([...supervisor, supName]);
+    setSupId([...supId, staff[e.target.value]._id]);
+  }
+  const loadCoSupName = (e) => {
+    const coSupName = `${staff[e.target.value].staff_FName} ${staff[e.target.value].staff_LName}`
+    setCoSupervisor([...cosupervisor, coSupName]);
+    setCoSupId([...coSupId, staff[e.target.value]._id]);
+  }
 
-    const newSupervisor = supervisorDetail;
+  const deleteSup = (index) => {
+    supervisor.splice(index, 1);
+    supId.splice(index, 1);
+    setSupervisor([...supervisor]);
+    setSupId([...supId]);
+  }
+  const deleteCoSup = (index) => {
+    cosupervisor.splice(index, 1);
+    coSupId.splice(index, 1);
+    setCoSupervisor([...cosupervisor]);
+    setCoSupId([...coSupId]);
+  }
 
-    // console.log(newStudent);
-    setSupervisor([...supervisor, newSupervisor]);
-    console.log(supervisor);
-    // event.target.reset();
-  };
-
-  const addCoSupervisor = (cosupervisorDetail) => {
-    console.log("data :", cosupervisorDetail);
-
-    const newCoSupervisor = cosupervisorDetail;
-
-    // console.log(newStudent);
-    setCoSupervisor([...cosupervisor, newCoSupervisor]);
-    console.log(cosupervisor);
-    // event.target.reset();
-  };
 
   return (
     <>
@@ -146,83 +180,71 @@ const TopicSubmit = () => {
                 <Input
                   type="select"
                   name="supervisor"
-                  onChange={formik.handleChange}
-                  // onClick={add}
+                  onChange={loadSupName}
                   onBlur={formik.handleBlur}
                   value={formik.values.supervisor}
                 >
-                  <option>S1</option>
-                  <option>S2</option>
-                  <option>S3</option>
-                  <option>S4</option>
-                  <option>S5</option>
-                  <option>S6</option>
+                  <option>Choose...</option>
+                  {staff.map((staff, index) => (
+                    <option key={staff._id} value={index}>{staff.staff_FName} {staff.staff_LName}</option>
+                  ))}
                 </Input>
                 {formik.touched.supervisor && formik.errors.supervisor ? (
                   <div style={{ color: "red" }}>{formik.errors.supervisor}</div>
                 ) : null}
-
-                <div>
-                  <Button
-                    color="primary"
-                    size="sm"
-                    type="button"
-                    onClick={() => {
-                      addSupervisor(formik.values.supervisor);
-                    }}
-                  >
-                    Add
-                  </Button>
-                </div>
               </FormGroup>
-
-              <br />
-              <div>
-                {supervisor.map((item, index) => {
-                  return (
-                    <div>
-                      <div xs="" key={index}></div>
-                      <CardText>{item.supervisorDetail}</CardText>
-                    </div>
-                  );
-                })}
-              </div>
+                <div>
+                  {supervisor?.map((sup, index) => {
+                    return (
+                      <Row key={index}>
+                        <hr/>
+                        <Col md="6">
+                        <span> {sup} </span>
+                        </Col>
+                        <Col md="6">
+                        <span onClick={() => {deleteSup(index)}}> X </span>
+                        </Col>
+                        <hr/>
+                      </Row>
+                    )
+                  })}
+                </div>
+                <br/><br/>
               <FormGroup>
                 <Label>Co-Supervisor</Label>
                 <Input
                   type="select"
                   name="co_supervisors"
-                  onChange={formik.handleChange}
+                  onChange={loadCoSupName}
                   onBlur={formik.handleBlur}
                   value={formik.values.co_supervisors}
                 >
-                  <option>S1</option>
-                  <option>S2</option>
-                  <option>S3</option>
-                  <option>S4</option>
-                  <option>S5</option>
-                  <option>S6</option>
+                  <option>Choose...</option>
+                  {staff.map((staff, index) => (
+                    <option key={staff._id} value={index}>{staff.staff_FName} {staff.staff_LName}</option>
+                  ))}
                 </Input>
-                {formik.touched.co_supervisors &&
-                formik.errors.co_supervisors ? (
-                  <div style={{ color: "red" }}>
-                    {formik.errors.co_supervisors}
-                  </div>
+                {formik.touched.co_supervisors && formik.errors.co_supervisors ? (
+                  <div style={{ color: "red" }}>{formik.errors.co_supervisors}</div>
                 ) : null}
-
-                <div>
-                  <Button
-                    color="primary"
-                    size="sm"
-                    type="button"
-                    onClick={() => {
-                      addCoSupervisor(formik.values.co_supervisors);
-                    }}
-                  >
-                    Add
-                  </Button>
-                </div>
               </FormGroup>
+                <div>
+                  {cosupervisor?.map((coSup, index) => {
+                    return (
+                      <Row key={index}>
+                        <hr/>
+                        <Col md="6">
+                        <span> {coSup} </span>
+                        </Col>
+                        <Col md="6">
+                        <span onClick={() => {deleteCoSup(index)}}> X </span>
+                        </Col>
+                        <hr/>
+                      </Row>
+                    )
+                  })}
+                </div>
+              <br />
               <div className="text-center">
                 <Button className="mt-4" color="primary" type="submit">
                   Submit
