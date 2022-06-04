@@ -202,7 +202,7 @@ const TopicSubmit = () => {
                         <span> {sup} </span>
                         </Col>
                         <Col md="6">
-                        <span onClick={() => {deleteSup(index)}}> X </span>
+                        <Button className="bg-danger" onClick={() => {deleteSup(index)}}><i className="ni ni-fat-remove" /></Button>
                         </Col>
                         <hr/>
                       </Row>
@@ -237,7 +237,7 @@ const TopicSubmit = () => {
                         <span> {coSup} </span>
                         </Col>
                         <Col md="6">
-                        <span onClick={() => {deleteCoSup(index)}}> X </span>
+                        <Button className="bg-danger" onClick={() => {deleteCoSup(index)}}><i className="ni ni-fat-remove" /></Button>
                         </Col>
                         <hr/>
                       </Row>

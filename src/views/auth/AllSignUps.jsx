@@ -34,7 +34,7 @@ const AllSignUps = () => {
     <div style={{marginLeft:550}}>
     <Col lg="12" md="6" className="align-center" >
       <Col md="6">
-      <Tabs  className="align-center bg-gradient-secondary opacity-7 rounded-top" value={value} indicatorColor="primary" textColor="primary" onChange={handleChange} aria-label="disabled tabs example">
+      <Tabs  className="align-center bg-white opacity-4 rounded-top" value={value} indicatorColor="white" textColor="white" onChange={handleChange} aria-label="disabled tabs example">
         <Tab label="As A Student" style={{ paddingLeft:80, paddingRight: 60 }} />
         <Tab label="As A Staff Member" style={{ paddingLeft:80, paddingRight: 60 }} />
       </Tabs>
@@ -52,7 +52,7 @@ const AllSignUps = () => {
               className="text-light"
               href="#pablo"
               >
-              <small>Already Have An Account</small>
+              <p>Already Have An Account</p>
             </a>
               </Link>
           </Col>

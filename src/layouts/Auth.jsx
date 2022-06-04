@@ -40,22 +40,23 @@ const AuthLayout = (props) => {
 	return (
 		<>
 			<div className="main-content" ref={mainContent}
-			        // style={{
-					// 	minHeight: "600px",
-					// 	backgroundImage:
-					// 	  "url(" + require("../assets/img/header/LoginHeader.png").default + ")",
-					// 	backgroundSize: "cover",
-					// 	backgroundPosition: "center top",
-					//   }}
+			        style={{
+						minHeight: "1000px",
+						backgroundImage:
+						  "url(" + require("../assets/img/auth3.png") + ")",
+						backgroundSize: "cover",
+						backgroundPosition: "center top",
+					  }}
 					  >
-						          {/* <span className="mask bg-gradient-default opacity-7" /> */}
+						          {/* <span className="mask bg-gradient-success opacity-2" /> */}
 				{/* <AuthNavbar /> */}
 				<div className="header  py-7 py-lg-8">
 					<Container>
-						<div className="header-body text-center mb-7">
+						<div className="header-body text-center mt-7">
 							<Row className="justify-content-center">
 								<Col lg="5" md="6">
-									<h1 className="text-white">Welcome To The Research Manament!</h1>
+									<br/><br/>
+									<h1 className="text">Welcome To The Research Management!</h1>
 								</Col>
 							</Row>
 						</div>
@@ -63,7 +64,7 @@ const AuthLayout = (props) => {
 
 				</div>
 				{/* Page content */}
-				<Container className="mt--8 pb-5">
+				<Container className="mt-4 pb-5">
 					<Row className="justify-content-center">
 						<Switch>
 							{getRoutes(routes)}

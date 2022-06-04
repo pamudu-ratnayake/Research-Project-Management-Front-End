@@ -63,11 +63,11 @@ const Topics = (props) => {
 
   return (
     <>
-      <Container className="mt--9" fluid>
+      <Container className="mt-5" fluid>
         <Row>
           <Col className="order-xl-1" xl="12">
-            <Card className="bg-secondary shadow">
-              <CardHeader className="bg-white border-0">
+            <Card className="bg-white shadow">
+              <CardHeader className="bg-muted border-0">
                 <Row className="align-items-center">
                   <Col xs="6">
                     <h1 className="mb-0">Requested Research Topics</h1>
@@ -119,10 +119,10 @@ const Topics = (props) => {
                         <tr key={topiclist._id}>
                           <td> {topiclist.research_grp_id} </td>
                           <td> {topiclist.topic} </td>
-                          <td> {topiclist?.document} </td>
+                          <td><i className="ni ni-cloud-download-95" /> Download </td>
                           <td className="text-right">
-                            <Button onClick={() => {onAccept(topiclist._id)}}>A</Button>
-                            <Button onClick={() => {onReject(topiclist._id)}}>R</Button>
+                            <Button className="bg-success" onClick={() => {onAccept(topiclist._id)}}><i className="ni ni-check-bold" /></Button>
+                            <Button className="bg-danger" onClick={() => {onReject(topiclist._id)}}><i className="ni ni-fat-remove" /></Button>
                           </td>
                         </tr>
                       ))}

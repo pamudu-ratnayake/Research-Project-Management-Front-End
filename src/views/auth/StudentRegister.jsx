@@ -16,6 +16,7 @@ import {
   InputGroup,
   Row,
   Col,
+  CardTitle,
 } from "reactstrap";
 
 const StudentRegister = () => {
@@ -26,7 +27,7 @@ const StudentRegister = () => {
     lastName: "",
     email: "",
     password: "",
-    conPassword: "",
+    con_Password: "",
     user_type: "Student",
     reg_no: "",
     faculty: "",
@@ -43,7 +44,8 @@ const StudentRegister = () => {
   });
 
   const onSubmit = (values) => {
-    if (values.password === values.conPassword) {
+    console.log(values);
+    // if (values.password === values.con_Password) {
       httpService
         .postAxios(`/auth-user/signup`, values)
         .then((res) => {
@@ -55,9 +57,9 @@ const StudentRegister = () => {
         .catch((err) => {
           console.error(err);
         });
-    } else {
-      alert("Password mismatching! Re-Enter Passwords");
-    }
+    // } else {
+    //   alert("Password mismatching! Re-Enter Passwords");
+    // }
   };
 
   const formik = useFormik({
@@ -71,50 +73,8 @@ const StudentRegister = () => {
       <Col lg="6" md="8">
         <Card className="bg-white shadow border-0">
           <CardHeader className="bg-transparent pb-5">
-            <div className="text-muted text-center mt-2 mb-4">
-              <small>Sign up with</small>
-            </div>
-            <div className="text-center">
-              <Button
-                className="btn-neutral btn-icon mr-4"
-                color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                {/* <span className="btn-inner--icon">
-                    <img
-                      alt="..."
-                      src={
-                        require("../../assets/img/icons/common/github.svg")
-                          .default
-                      }
-                    />
-                  </span> */}
-                <span className="btn-inner--text">Github</span>
-              </Button>
-              <Button
-                className="btn-neutral btn-icon"
-                color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                {/* <span className="btn-inner--icon">
-                    <img
-                      alt="..."
-                      src={
-                        require("../../assets/img/icons/common/google.svg")
-                          .default
-                      }
-                    />
-                  </span> */}
-                <span className="btn-inner--text">Google</span>
-              </Button>
-            </div>
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
-            <div className="text-center text-muted mb-4">
-              <small>Or sign up with credentials</small>
-            </div>
             <Form onSubmit={formik.handleSubmit}>
               <Row>
                 <Col>
@@ -146,7 +106,7 @@ const StudentRegister = () => {
                     <InputGroup className="input-group-alternative mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          {/* <i className="ni ni-circle-08" /> */}
+                          <i className="ni ni-circle-08" />
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
@@ -172,12 +132,12 @@ const StudentRegister = () => {
                     <InputGroup className="input-group-alternative mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          {/* <i className="ni ni-hat-3" /> */}
+                          <i className="ni ni-hat-3" />
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
                         name="reg_no"
-                        placeholder="Regidtration Number"
+                        placeholder="Reg Number"
                         type="text"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -194,7 +154,7 @@ const StudentRegister = () => {
                     <InputGroup className="input-group-alternative mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          {/* <i className="ni ni-hat-3" /> */}
+                          <i className="ni ni-hat-3" />
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
@@ -228,7 +188,7 @@ const StudentRegister = () => {
                 <InputGroup className="input-group-alternative mb-3">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      {/* <i className="ni ni-email-83" /> */}
+                      <i className="ni ni-email-83" />
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
@@ -248,7 +208,7 @@ const StudentRegister = () => {
                 <InputGroup className="input-group-alternative mb-3">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      {/* <i className="ni ni-lock-circle-open" /> */}
+                      <i className="ni ni-lock-circle-open" />
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
@@ -268,7 +228,7 @@ const StudentRegister = () => {
                 <InputGroup className="input-group-alternative mb-3">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      {/* <i className="ni ni-lock-circle-open" /> */}
+                      <i className="ni ni-lock-circle-open" />
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input

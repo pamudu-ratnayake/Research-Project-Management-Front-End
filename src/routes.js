@@ -30,6 +30,7 @@ var routes = [
         path: "/admin-dashboard",
         name: "Dashboard",
         component: AdminDashboard,
+        icon: "ni ni-tv-2 text-primary",
         layout: "/admin"
     },
     {

@@ -120,11 +120,11 @@ const CreateMarking = (props) => {
 
   return (
     <>
-      <Container className="mt--9" fluid>
+      <Container className="mt-5" fluid>
         <Row>
           <Col className="order-xl-1">
             <Card className="bg-white shadow">
-              <CardHeader className="bg-secondary border-0">
+              <CardHeader className="bg-muted border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
                     <h1 className="mb-0">Create A Marking Scheme</h1>
