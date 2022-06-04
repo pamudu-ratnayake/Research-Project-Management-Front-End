@@ -24,6 +24,7 @@
     "react-dropzone": "^11.4.0",
     "react-file-base64": "^1.0.3",
     "react-icons": "^3.10.0",
+    "react-router": "^6.3.0",
     "react-router-dom": "5.2.0",
     "react-scroll-to-bottom": "^4.1.2",
     "reactstrap": "8.9.0",
@@ -31,8 +32,12 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@parcel/transformer-image": "^2.0.0-rc.0",
+    "@testing-library/jest-dom": "5.16.4",
+    "@testing-library/react": "12.1.5",
     "buffer": "^6.0.3",
     "parcel": "^2.0.0-rc.0",
+    "parcel-bundler": "^1.12.5",
     "process": "^0.11.10"
   }
 }

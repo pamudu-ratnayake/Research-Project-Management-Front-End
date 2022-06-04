@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import httpService from "../../services/axiosService/httpService";
+import Chat from "../../components/chats/Chat";
 
 import {
   Card,
@@ -13,6 +14,7 @@ import {
   Button,
   Container,
   Input,
+  Modal
 } from "reactstrap";
 
 const MyResearchTopics = (props) => {
@@ -22,6 +24,12 @@ const MyResearchTopics = (props) => {
     const [topiclist, settopic] = useState([]);
     const [searchStr, setSearch] = useState('');
     // const [deleteID, setDeleteID] = useState('');
+
+    const [exampleModal, setmodalDemo] = useState(false);
+
+    function toggleModal() {
+        setmodalDemo(!exampleModal);
+    };
   
     useEffect(() => {
       httpService
@@ -38,14 +46,14 @@ const MyResearchTopics = (props) => {
 
     return(
         <>
-            <Container className="mt--9" fluid>
+            <Container className="mt-5" fluid>
         <Row>
           <Col className="order-xl-1" xl="12">
-            <Card className="bg-secondary shadow">
-              <CardHeader className="bg-white border-0">
+            <Card className="bg-white shadow">
+              <CardHeader className="bg-muted border-0">
                 <Row className="align-items-center">
                   <Col xs="6">
-                    <h1 className="mb-0">Requested Research Topics</h1>
+                    <h1 className="mb-0">My Research Topics</h1>
                   </Col>
                   <Col xs="4">
                     <div style={{ marginLeft: 170 }}>
@@ -74,6 +82,7 @@ const MyResearchTopics = (props) => {
                       <th scope="col">Research Group ID</th>
                       <th scope="col">Research Topic</th>
                       <th scope="col">Document</th>
+                      <th scope="col"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -93,7 +102,19 @@ const MyResearchTopics = (props) => {
                         <tr key={topiclist._id}>
                           <td> {topiclist.research_grp_id} </td>
                           <td> {topiclist.topic} </td>
-                          <td> {topiclist?.document} </td>
+                          <td> <i className="ni ni-cloud-download-95" /> Download </td>
+                          <td>
+                              <Button className="bg-success" onClick={() => {toggleModal("exampleModal")}}> <i className="ni ni-chat-round" /> </Button> 
+
+                              <Modal
+                                  className="modal-dialog-centered"
+                                  isOpen={exampleModal}
+                                  toggle={() => toggleModal("exampleModal")}
+                                >
+                                    <Chat data={topiclist.research_grp_id}/>
+                                </Modal>
+
+                            </td>
                         </tr>
                       ))}
                   </tbody>

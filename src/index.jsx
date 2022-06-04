@@ -27,8 +27,9 @@ import StudentLayout from "./layouts/Student.jsx";
 
 import AdminDasboard from "./views/AdminDashboard.jsx";
 
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./assets/plugins/nucleo/css/nucleo.css";
 
 // import "assets/plugins/nucleo/css/nucleo.css";
 // import "@fortawesome/fontawesome-free/css/all.min.css";

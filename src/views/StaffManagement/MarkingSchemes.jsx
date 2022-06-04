@@ -26,11 +26,11 @@ const MarkingSchemes = () => {
 
     return (
         <>
-            <Container className="mt--9" fluid>
+            <Container className="mt-5" fluid>
         <Row>
           <Col className="order-xl-1" xl="12">
-            <Card className="bg-secondary shadow">
-              <CardHeader className="bg-white border-0">
+            <Card className="bg-white shadow">
+              <CardHeader className="bg-muted border-0">
                 <Row className="align-items-center">
                   <Col xs="6">
                     <h1 className="mb-0">Marking Schemes</h1>

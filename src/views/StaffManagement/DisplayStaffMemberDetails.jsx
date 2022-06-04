@@ -31,11 +31,11 @@ const DisplayStaffMemberDetails = (props) => {
 
     return(
         <>
-<Container className="mt--7">
+<Container className="mt--5" fluid>
         <Row>
           <Col className="order-xl-1" xl="12">
-            <Card className="bg-secondary shadow">
-              <CardHeader className="bg-white border-0">
+            <Card className="bg-white shadow">
+              <CardHeader className="bg-muted border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
                     {/* <h2 className="mb-0">Advertisement Information</h2> */}
