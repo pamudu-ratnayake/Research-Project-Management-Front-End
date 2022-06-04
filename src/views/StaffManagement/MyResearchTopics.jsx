@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import httpService from "../../services/axiosService/httpService";
 
 import {
@@ -15,55 +15,30 @@ import {
   Input,
 } from "reactstrap";
 
-const Topics = (props) => {
+const MyResearchTopics = (props) => {
 
-  const user = JSON.parse(localStorage.getItem("profile"));
+    const user = JSON.parse(localStorage.getItem("profile"));
 
-  const [topiclist, settopic] = useState([]);
-  const [searchStr, setSearch] = useState('');
-  // const [deleteID, setDeleteID] = useState('');
+    const [topiclist, settopic] = useState([]);
+    const [searchStr, setSearch] = useState('');
+    // const [deleteID, setDeleteID] = useState('');
+  
+    useEffect(() => {
+      httpService
+        .getAxios(`/topic/getAcceptedTopiciDetails/${user?.result?._id}`)
+        .then((res) => {
+          console.log(user?.result?._id);
+          settopic(res.data);
+          console.log(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, []);
 
-  let history = useHistory();
-
-  useEffect(() => {
-    httpService
-      .getAxios(`/topic/getTopiciDetails/${user?.result?._id}`)
-      .then((res) => {
-        console.log(user?.result?._id);
-        settopic(res.data);
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  const onAccept = (topicID) => {
-    httpService.postAxios(`/topic/updateStatus/${topicID}`)
-    .then((res) => {
-      console.log(res.data);
-      history.push({
-        pathname: `/staff/myresearch-topics`,
-      });
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-  };
-
-  const onReject = (topicID) => {
-    httpService.postAxios(`/topic/rejectTopic/${topicID}`)
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-  }
-
-  return (
-    <>
-      <Container className="mt--9" fluid>
+    return(
+        <>
+            <Container className="mt--9" fluid>
         <Row>
           <Col className="order-xl-1" xl="12">
             <Card className="bg-secondary shadow">
@@ -99,7 +74,6 @@ const Topics = (props) => {
                       <th scope="col">Research Group ID</th>
                       <th scope="col">Research Topic</th>
                       <th scope="col">Document</th>
-                      <th scope="col" />
                     </tr>
                   </thead>
                   <tbody>
@@ -120,10 +94,6 @@ const Topics = (props) => {
                           <td> {topiclist.research_grp_id} </td>
                           <td> {topiclist.topic} </td>
                           <td> {topiclist?.document} </td>
-                          <td className="text-right">
-                            <Button onClick={() => {onAccept(topiclist._id)}}>A</Button>
-                            <Button onClick={() => {onReject(topiclist._id)}}>R</Button>
-                          </td>
                         </tr>
                       ))}
                   </tbody>
@@ -133,8 +103,8 @@ const Topics = (props) => {
           </Col>
         </Row>
       </Container>
-    </>
-  );
-};
+        </>
+    )
+}
 
-export default Topics;
+export default MyResearchTopics;

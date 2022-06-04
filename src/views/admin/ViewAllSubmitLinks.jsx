@@ -69,7 +69,7 @@ const ViewAllSubmitLinks = (props) => {
                     </div>
                   </Col>
                   <Col className="text-right ml--6" xs="2">
-                    <Link to={"/customer/add-event"}>
+                    <Link to={"/admin/publishlinks"}>
                       <Button color="primary" size="sm">
                         Create A Link
                       </Button>

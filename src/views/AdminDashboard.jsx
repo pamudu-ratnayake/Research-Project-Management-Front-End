@@ -22,7 +22,8 @@ const AdminDashboard = (props) => {
     },[]);
 
     const downloadTemplate = (template) => {
-        fileDownload(template, "Template");
+        // fileDownload(template, "Template");
+        window.open(template, '_blank', 'noopener,noreferrer');
     }
 
     return (
@@ -30,7 +31,7 @@ const AdminDashboard = (props) => {
         <Container className="mt--9" fluid>
             <h1>Hello Reactt!</h1>
             <Button>Admin Here</Button>
-            {/* <Chat/> */}
+            <Chat/>
 
             {posts?.map((posts) => (
                 <div key={posts._id}>

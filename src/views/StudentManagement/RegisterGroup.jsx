@@ -38,11 +38,7 @@ const RegisterGroup = (props) => {
     contact: Yup.number().required("Required!"),
   });
 
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-    validationSchema,
-  });
+
 
   const [student, setStudent] = useState([]);
 
@@ -88,6 +84,12 @@ const RegisterGroup = (props) => {
     alert("");
     window.location.reload(false);
   };
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
 
   return (
     <>
@@ -235,7 +237,7 @@ const RegisterGroup = (props) => {
                         color="primary"
                         size="sm"
                         type="button"
-                        // onClick={add}
+                        onClick={add}
                       >
                         Add
                       </Button>

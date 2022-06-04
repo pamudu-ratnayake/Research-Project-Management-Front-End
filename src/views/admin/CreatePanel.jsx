@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import httpService from "../../services/axiosService/httpService";
 
 import {
@@ -45,8 +46,6 @@ const CreatePanel = (props) => {
     research_area: "",
     no_of_members: 0,
     members: [],
-    // con_no: "",
-    // emails: "",
   };
 
   const validationSchema = Yup.object({
@@ -58,6 +57,8 @@ const CreatePanel = (props) => {
     // emails: Yup.string().required("*Required!"),
   });
 
+  let history = useHistory();
+
   const onSubmit = (values) => {
     const panelData = {
       panel_no : values.panel_no,
@@ -65,12 +66,12 @@ const CreatePanel = (props) => {
       members : panelMembers,
       no_of_members : panelMembers.length
     };
-    // values.no_of_members = panelMembers.length;
-    // values.members = panelMembers;
-    console.log("values are: ", panelData)
     httpService.postAxios('/admin/create-panel', panelData)
     .then((res) => {
       console.log(res.data);
+      history.push({
+        pathname: `/admin/viewAll-panels`,
+      });
     })
     .catch((err) => {
       console.error(err);
@@ -152,7 +153,7 @@ const CreatePanel = (props) => {
                         <label>Panel Number</label>
                         <Input
                           id="exampleFormControlInput1"
-                          placeholder="Status"
+                          placeholder="Panel Number"
                           type="text"
                           name="panel_no"
                           onChange={formik.handleChange}
@@ -238,7 +239,7 @@ const CreatePanel = (props) => {
                     Add Member
                   </Button>
 
-                  {panelMembers && panelMembers.map((member, index) => {
+                  {panelMembers?.map((member, index) => {
                     return (
                       <Row key={index}>
                         <hr/>

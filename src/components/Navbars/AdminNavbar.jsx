@@ -6,6 +6,31 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { DropdownMenu, DropdownItem, UncontrolledDropdown, DropdownToggle, Form, FormGroup, InputGroupAddon, InputGroupText, Input, InputGroup, Navbar, Nav, Container, Media } from "reactstrap";
 
 const AdminNavbar = (props) => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [customer, setCustomer] = useState("");
+
+  console.log(user);
+
+  const history = useHistory();
+  const location = useLocation();
+
+  const logout = () => {
+    history.push("/auth");
+    localStorage.clear();
+    setUser(null);
+  };
+
+  useEffect(() => {
+    const token = user?.token;
+
+    if (token) {
+      // const decodedToken = decode(token);
+      // if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
+
+    setUser(JSON.parse(localStorage.getItem("profile")));
+
+  }, []);
 
   return (
     <>
@@ -44,7 +69,7 @@ const AdminNavbar = (props) => {
                   <i className="ni ni-user-run" />
                   <span
                     onClick={() => {
-                    //   logout();
+                      logout();
                     }}
                   >
                     Logout

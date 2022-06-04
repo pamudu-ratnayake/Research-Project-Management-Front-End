@@ -18,7 +18,8 @@ import {
   Col,
 } from "reactstrap";
 
-const UploadTemplates = (props) => {
+const CreateMarking = (props) => {
+
   const baseStyle = {
     flex: 1,
     display: "flex",
@@ -86,7 +87,7 @@ const UploadTemplates = (props) => {
   const initialValues = {
     enableReinitialize: true,
     validateOnMount: true,
-    template_title: "",
+    title: "",
     description: "",
   };
 
@@ -94,11 +95,11 @@ const UploadTemplates = (props) => {
 
   const onSubmit = (values) => {
       let formdata = new FormData();
-      formdata.append("template_title", values.template_title);
+      formdata.append("title", values.template_title);
       formdata.append("description", values.description);
       formdata.append("file", acceptedFiles[0]);
 
-    httpService.postAxios(`/admin/create-template`, formdata)
+    httpService.postAxios(`/admin/create-marking`, formdata)
     .then((res) => {
         console.log(res.data);
         history.push({
@@ -126,7 +127,7 @@ const UploadTemplates = (props) => {
               <CardHeader className="bg-secondary border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
-                    <h1 className="mb-0">Upload A Template</h1>
+                    <h1 className="mb-0">Create A Marking Scheme</h1>
                   </Col>
                 </Row>
               </CardHeader>
@@ -135,15 +136,15 @@ const UploadTemplates = (props) => {
                   <Row>
                     <Col md="6">
                       <FormGroup>
-                        <label>Template Title</label>
+                        <label>Marking Title</label>
                         <Input
                           id="exampleFormControlInput1"
-                          placeholder="Status"
+                          placeholder="Title"
                           type="text"
-                          name="template_title"
+                          name="title"
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          value={formik.values.template_title}
+                          value={formik.values.title}
                         ></Input>
                       </FormGroup>
                     </Col>
@@ -151,10 +152,10 @@ const UploadTemplates = (props) => {
                   <Row>
                     <Col md="12">
                       <FormGroup>
-                        <label>Template Description</label>
+                        <label>Marking Description</label>
                         <Input
                           id="exampleFormControlInput1"
-                          placeholder="Status"
+                          placeholder="Marking Details...."
                           type="textarea"
                           name="description"
                           onChange={formik.handleChange}
@@ -178,7 +179,7 @@ const UploadTemplates = (props) => {
 
                   <div className="text-center">
                     <Button className="mt-4" color="primary" type="submit">
-                      Upload Template
+                      Upload Marking
                     </Button>
                   </div>
                 </Form>
@@ -191,4 +192,4 @@ const UploadTemplates = (props) => {
   );
 };
 
-export default UploadTemplates;
+export default CreateMarking;

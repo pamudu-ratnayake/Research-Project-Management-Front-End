@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-//import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import httpService from "../../services/axiosService/httpService";
 
@@ -19,6 +19,8 @@ import {
 } from "reactstrap";
 
 const StudentRegister = () => {
+  let history = useHistory();
+
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -41,14 +43,21 @@ const StudentRegister = () => {
   });
 
   const onSubmit = (values) => {
-    console.log('triggered');
-    httpService.postAxios(`/auth-user/signup`, values)
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.error(err);
-    })
+    if (values.password === values.conPassword) {
+      httpService
+        .postAxios(`/auth-user/signup`, values)
+        .then((res) => {
+          console.log(res.data);
+          history.push({
+            pathname: `/auth/login`,
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      alert("Password mismatching! Re-Enter Passwords");
+    }
   };
 
   const formik = useFormik({
@@ -185,17 +194,27 @@ const StudentRegister = () => {
                     <InputGroup className="input-group-alternative mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          {/* <i className="ni ni-circle-08" /> */}
+                          {/* <i className="ni ni-hat-3" /> */}
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
+                        id="faculty"
                         name="faculty"
-                        placeholder="Faculty"
-                        type="text"
+                        type="select"
+                        placeholder="Regidtration Number"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.faculty}
-                      />
+                      >
+                        <option>Faculty...</option>
+                        <option>Faculty of Computing</option>
+                        <option>Faculty of Business</option>
+                        <option>Faculty Of Engineering</option>
+                        <option>Faculty of Humanities and Sciences</option>
+                        <option>
+                          Faculty of Graduate Studies and Research
+                        </option>
+                      </Input>
                     </InputGroup>
                     {formik.touched.faculty && formik.errors.faculty ? (
                       <div style={{ color: "red" }}>
