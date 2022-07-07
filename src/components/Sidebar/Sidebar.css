@@ -1,6 +1,9 @@
   .navbar {
-    background-color: #1eaafc;
-    height: 80px;
+    /* background-color: #fc891e; */
+    background-image:  url("../../assets/img/toppanel2.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 120px;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -13,8 +16,8 @@
   }
   
   .nav-menu {
-    background-color: #1eaafc;
-    width: 250px;
+    background-color: #1eabfcf3;
+    width: 300px;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -22,10 +25,11 @@
     top: 0;
     left: -100%;
     transition: 850ms;
+    z-index: 100;
   }
   
   .nav-menu.active {
-    left: 0;
+    left: -40;
     transition: 350ms;
   }
   
